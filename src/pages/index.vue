@@ -3,7 +3,6 @@ import type { Ref } from 'vue'
 import axios from 'axios'
 import YouTube from 'vue3-youtube'
 import { Trash } from '@vicons/tabler'
-import { useMessage } from 'naive-ui'
 import { toggleDark } from '~/composables'
 import { getTimestamps, updateTimestamp, useLoadTimestamps } from '~/firebase'
 
@@ -17,8 +16,6 @@ const loading = ref(false)
 const newVideoId = ref('')
 const searchInput = ref('')
 const { t } = useI18n()
-
-const message = useMessage()
 
 const vars: Ref<YT.PlayerVars> = ref({
   loop: 1,
@@ -74,7 +71,6 @@ const deleteTimestamp = async (video: any, index: any) => {
     timeStampsPerVideo.value[video].timestamps.splice(index, 1)
   }
   catch (error) {
-    message.error(`An error occurred ${error}`)
     console.error(`An error occurred ${error}`)
   }
   finally {
@@ -101,7 +97,6 @@ const synchronize = async () => {
     await Promise.all(timeStampsPerVideo.value.map((timestamp: any) => updateTimestamp(timestamp.id, timestamp)))
   }
   catch (error) {
-    message.error(`An error occurred ${error}`)
     console.error(`An error occurred ${error}`)
   }
   finally {
