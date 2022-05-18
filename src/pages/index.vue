@@ -117,7 +117,6 @@ onBeforeMount(async () => {
     timeStampsPerVideo.value = timestamps.docs.map(timestamp => ({ id: timestamp.id, ...timestamp.data() }))
   }
   catch (error) {
-    message.error(`An error occurred ${error}`)
     console.error(`An error occurred ${error}`)
   }
   finally {
